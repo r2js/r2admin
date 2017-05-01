@@ -1,0 +1,20 @@
+body {
+  font-family: 'Nunito', sans-serif;
+	overflow: hidden;
+	margin: 0;
+	color: #47484c;
+	background: #f0f0f0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 1.525em;
+}
+
+/* login page */
+.admin-body-login {background-color:#1c1d22;}
+.admin-body-login .form-wrapper {margin-top:180px;}
+.admin-body-login h2.title {text-align:center;letter-spacing:2px;font-weight:800;color:#fff;}
+.admin-body-login .form-control {height:44px;}
+.admin-body-login .form-wrapper .btn-primary {width:40%;background-color:#5c5edc;border-color:#5c5edc;color:#fff;font-weight:700;}
+
+/* index page */
+.admin-body-index .menu__level {visibility:visible;}

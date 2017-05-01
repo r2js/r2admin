@@ -1,0 +1,6 @@
+<div id="field-{{ name }}" class="form-group">
+  {% if label %}<label for="f-{{ name }}">{{ label }}</label>{% endif %}
+  <div>
+    <input name="{{ name }}" id="f-{{ name }}" type="text" class="form-control" value="" placeholder="{{ placeholder or name}}">
+  </div>
+</div>

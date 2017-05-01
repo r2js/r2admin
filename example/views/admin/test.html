@@ -1,0 +1,18 @@
+{% extends adminPath+'/page/dashboard/index.html' %}
+
+{% block logo %}
+<div class="dummy-logo">
+  <div class="dummy-icon foodicon foodicon--coconut"></div>
+  <h2 class="dummy-heading">My Logo</h2>
+</div>
+{% endblock %}
+
+{% block content %}
+  <div class="content">
+    <p class="info">
+      <form role="form" action="/admin/login" method="POST">
+        {% string 'email',{label: false, placeholder: 'Emailxxx'} %}{% endstring %}
+      </form>
+    </p>
+  </div>
+{% endblock %}

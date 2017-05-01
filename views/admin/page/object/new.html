@@ -1,0 +1,15 @@
+{% extends adminPath+'/page/dashboard/index.html' %}
+
+{% block content %}
+  <div class="content">
+    <form role="form" action="/admin/o/{{ object }}/save" method="POST">
+      {% for k, p in paths %}
+        {% set firstChar = k|first %}
+        {% if firstChar !== '_' %}
+          {% field {name: k} %}{% endfield %}
+        {% endif %}
+      {% endfor %}
+      {% submit 'Save',{} %}{% endsubmit %}
+    </form>
+  </div>
+{% endblock %}
