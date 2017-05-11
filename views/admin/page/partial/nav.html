@@ -1,8 +1,8 @@
 <nav id="ml-menu" class="menu">
   <div class="menu__wrap">
     <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
-      {% for k, m in adminConf.models %}
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="/admin/o/{{ k }}/new">{{ m.nav or k }}</a></li>
+      {% for k, m in admin.conf.models %}
+        <li class="menu__item" role="menuitem"><a class="menu__link" href="/{{ admin.baseUrl }}/{{ k }}/new">{{ m.nav or k }}</a></li>
       {% endfor %}
     </ul>
   </div>

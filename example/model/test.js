@@ -8,7 +8,7 @@ module.exports = (app) => {
 
   const votesSchema = new Schema({
     _id: false,
-    user: { type: ObjectId, ref: 'test' },
+    user: { type: ObjectId, ref: 'user' },
     type: { type: String },
   });
 
@@ -19,16 +19,21 @@ module.exports = (app) => {
   });
 
   const schema = new Schema({
-    user: { type: ObjectId, ref: 'test' },
+    user: { type: ObjectId, ref: 'user', display: 'email' },
     name: { type: String },
     email: { type: String },
     slug: { type: String },
-    description: { type: String },
+    excerpt: { type: String, field: 'textArea' },
+    description: { type: String, field: 'richText' },
     isEnabled: { type: String, default: 'n' },
     createdAt: { type: Date },
+    expiredAt: { type: Date, field: 'dateTime' },
+    workers: [{ type: ObjectId, ref: 'user', display: 'email' }],
     workerCount: { type: Number, default: 0 },
     links: { type: linksSchema },
     votes: { type: [votesSchema] },
+    tags: { type: [String] },
+    photo: { type: String, field: 'image' },
   });
 
   const attributes = {
@@ -53,8 +58,8 @@ module.exports = (app) => {
     isEnabled: 'in:y,n',
   };
 
-  schema.r2options = { attributes, rules };
   Validate(schema, { attributes, rules });
+  schema.r2options = { attributes, rules };
 
   schema.plugin(idValidator);
   const model = mongoose.model('test', schema);

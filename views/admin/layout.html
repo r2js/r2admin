@@ -5,13 +5,12 @@
   <meta charset="utf-8">
   <title>{% block title %}{% endblock %}</title>
   {% block head %}
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800,900&amp;subset=latin-ext" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/assets/bootstrap-3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/nav.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/demo.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" />
+    {% block font %}<link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800,900&amp;subset=latin-ext" rel="stylesheet">{% endblock %}
+    <link rel="stylesheet" type="text/css" href="/dist/vendor.css?v={{ admin.now }}" />
+    <link rel="stylesheet" type="text/css" href="/dist/app.css?v={{ admin.now }}" />
+    <script type="text/javascript" src="/dist/vendor.js?v={{ admin.now }}"></script>
+    <script type="text/javascript" src="/dist/app.js?v={{ admin.now }}"></script>
   {% endblock %}
 </head>
 {% block page %}{% endblock %}
 </html>
-

@@ -1,27 +1,20 @@
-{#
-{% set model = "testtest" %}
-{% mUser {limit: 10, username: "selcuk"} %}
-  sgsgsdgddf
-{% error %}
-  There was an error fetching /stuff
-{% endmodel %}
-#}
-
-{% extends '../../layout.html' %}
+{% extends admin.path+'/layout.html' %}
 {% block head %}{{ super() }}{% endblock %}
 
 {% block page %}
 <body class="admin-body-login">
-  <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      <div class="form-wrapper animated fadeInDown">
-        <h2 class="title">r2</h2>
-        <form role="form" action="/admin/login" method="POST">
-          {% string 'email',{label: false, placeholder: 'Email'} %}{% endstring %}
-          {% password 'passwd',{label: false, placeholder: 'Password'} %}{% endpassword %}
-          {% submit 'Login',{} %}{% endsubmit %}
-        </form>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="form-wrapper animated fadeInDown">
+          <h2 class="title">r2</h2>
+          <form role="form" action="/{{ admin.baseUrl }}/{{ admin.login }}" method="POST">
+            {% string 'email',{label: false, placeholder: 'Email'} %}{% endstring %}
+            {% password 'passwd',{label: false, placeholder: 'Password'} %}{% endpassword %}
+            {% submit 'Login',{} %}{% endsubmit %}
+          </form>
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,9 @@
+<div id="field-{{ name }}" class="form-group {% if errors[name] %}has-error{% endif %}">
+    {% if label %}<label for="f-{{ name }}">{{ label }}</label>{% endif %}
+    <div>
+        <textarea name="{{ name }}" id="f-{{ name }}" class="f-richtext form-control" rows="10">{{ data[name] }}</textarea>
+        {% if errors[name] %}
+          <span class="help-block">{{ errors[name] }}</span>
+        {% endif %}
+    </div>
+</div>

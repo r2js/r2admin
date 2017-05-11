@@ -1,7 +1,7 @@
 <div id="field-{{ name }}" class="form-group {% if errors[name] %}has-error{% endif %}">
   <label for="f-{{ name }}">{{ label or name }}</label>
   <div>
-    <input name="{{ name }}" id="f-{{ name }}" type="text" class="form-control" value="{{ data[name] }}" placeholder="{{ placeholder or name }}">
+    <textarea name="{{ name }}" id="f-{{ name }}" class="form-control" placeholder="{{ placeholder or name }}">{{ data[name] }}</textarea>
     {% if errors[name] %}
       <span class="help-block">{{ errors[name] }}</span>
     {% endif %}

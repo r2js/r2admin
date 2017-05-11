@@ -1,16 +1,16 @@
-{% extends adminPath+'/layout.html' %}
+{% extends admin.path+'/layout.html' %}
 {% block head %}{{ super() }}{% endblock %}
 
 {% block page %}
 <body class="admin-body-index">
   <div class="wrapper">
     <header class="bp-header cf">
-      {% block logo %}{% include adminPath+'/page/partial/logo.html' %}{% endblock %}
-      {% block header %}{% include adminPath+'/page/partial/header.html' %}{% endblock %}
+      {% block logo %}{% include admin.path+'/page/partial/logo.html' %}{% endblock %}
+      {% block header %}{% include admin.path+'/page/partial/header.html' %}{% endblock %}
     </header>
 
-    {% block nav %}{% include adminPath+'/page/partial/nav.html' %}{% endblock %}
-    {% block content %}{% include adminPath+'/page/dashboard/content.html' %}{% endblock %}
+    {% block nav %}{% include admin.path+'/page/partial/nav.html' %}{% endblock %}
+    {% block content %}{% include admin.path+'/page/dashboard/content.html' %}{% endblock %}
   </div>
 </body>
 {% endblock %}

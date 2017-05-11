@@ -4,6 +4,7 @@ const libIndex = require('./lib/index');
 const libAuth = require('./lib/auth');
 const libMiddleware = require('./lib/middleware');
 const libCreate = require('./lib/create');
+const libObject = require('./lib/object');
 const log = require('debug')('r2:admin');
 
 const toString = Object.prototype.toString;
@@ -18,35 +19,34 @@ module.exports = function Admin(app, conf) {
     return log('service [User] not found!');
   }
 
+  const { baseUrl = 'admin', login = 'login', logout = 'logout' } = conf;
   const viewsPath = `${__dirname}/views`;
-  app.use((req, res, next) => {
-    Object.assign(res.locals, {
-      adminPath: `${viewsPath}/admin`,
-      adminConf: conf,
-    });
-    next();
-  });
 
+  // set views directory
   let views = app.get('views');
   views = toString.call(views) === '[object String]' ? [views] : views;
   views = views.concat([viewsPath]);
   app.set('views', views);
 
+  // static middleware
   const staticDir = path.dirname(process.cwd());
-  app.use(express.static(`${staticDir}/public`, {}));
+  app.use(express.static(`${staticDir}/public`, { maxAge: '1d' }));
 
-  const middleware = libMiddleware(app, conf);
+  // libraries
+  const middleware = libMiddleware(app, conf, viewsPath);
+  const { assignReq } = middleware;
   const auth = libAuth(app, conf);
   const create = libCreate(app, conf);
-  const { baseUrl = 'admin', login = 'login', logout = 'logout' } = conf;
+  const object = libObject(app, conf);
 
-  app.get(`/${baseUrl}`, libIndex(app));
-  app.get(`/${baseUrl}/${login}`, auth.form);
-  app.post(`/${baseUrl}/${login}`, auth.login);
-  app.get(`/${baseUrl}/${logout}`, auth.logout);
-  app.get(`/${baseUrl}/test`, auth.test);
-  app.get(`/${baseUrl}/o/:object/new`, create.form);
-  app.post(`/${baseUrl}/o/:object/save`, create.object);
+  app.get(`/${baseUrl}`, assignReq, libIndex(app));
+  app.get(`/${baseUrl}/${login}`, assignReq, auth.form);
+  app.post(`/${baseUrl}/${login}`, assignReq, auth.login);
+  app.get(`/${baseUrl}/${logout}`, assignReq, auth.logout);
+  app.get(`/${baseUrl}/:object/new`, assignReq, create.form);
+  app.post(`/${baseUrl}/:object/new`, assignReq, create.object);
+  app.get(`/${baseUrl}/:object/search`, assignReq, object.search);
+  app.get(`/${baseUrl}/:object/ids`, assignReq, object.ids);
 
   return middleware;
 };

@@ -1,0 +1,30 @@
+<div id="field-{{ name }}" class="form-group {% if errors[name] %}has-error{% endif %}">
+  <label for="f-{{ name }}">{{ label or name }}</label>
+  <div>
+    {% set instance = path.instance|lower %}
+    <select
+      name="{{ name }}"
+      id="f-{{ name }}"
+      data-ref="{{ pathOpts.ref }}"
+      data-display="{{ pathOpts.display }}"
+      data-type="{{ instance }}"
+      data-value="{{ data[name] }}"
+      data-placeholder="{{ placeholder or name }}"
+      class="f-relation"
+      style="visibility:hidden;display:none;"
+      {% if instance === 'array' %}multiple{% endif %}>
+        {% if instance === 'array' %}
+          {% set emptyArr = [] %}
+          {% set dataArr = emptyArr.concat(data[name]) %}
+          {% for d in dataArr %}
+            <option value="{{ d }}"></option>
+          {% endfor %}
+        {% else %}
+          <option value="{{ data[name] }}"></option>
+        {% endif %}
+    </select>
+    {% if errors[name] %}
+      <span class="help-block">{{ errors[name] }}</span>
+    {% endif %}
+  </div>
+</div>
