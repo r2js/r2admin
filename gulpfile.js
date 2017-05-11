@@ -23,6 +23,8 @@ const vendorStyles = [
   './node_modules/selectize/dist/css/selectize.bootstrap3.css',
   './app/styles/theme.css',
   './node_modules/float-labels.js/dist/float-labels.css',
+  './node_modules/tinymce/skins/lightgray/skin.min.css',
+  './node_modules/tinymce/skins/lightgray/content.min.css',
 ];
 
 const appStyles = [
@@ -81,6 +83,7 @@ gulp.task('fonts', () => (
   gulp.src([
     'app/fonts/**/*',
     'node_modules/bootstrap/dist/fonts/**/*',
+    'node_modules/tinymce/skins/lightgray/fonts/**/*',
   ])
     .pipe($.flatten())
     .pipe(gulp.dest('public/dist/fonts'))
@@ -108,7 +111,7 @@ gulp.task('less', () => (
     .pipe(gulp.dest('app/styles'))
 ));
 
-gulp.task('run', ['less', 'styles:vendor', 'styles:app', 'build:vendor', 'build:app'], () => {
+gulp.task('run', ['less', 'styles:vendor', 'styles:app', 'build:vendor', 'build:app', 'fonts'], () => {
   gulp.watch([
     'views/**/*.html',
     'app/**/*.js',

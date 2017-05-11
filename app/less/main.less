@@ -1,5 +1,6 @@
 @base-color: #5c5edc;
 @base-bg: #1c1d22;
+.base-font { font-family: 'Nunito', sans-serif; }
 .white-bg { background: #fff; }
 .white { color: #fff; }
 .base-body { background-color: @base-color; border-color: @base-color; }
@@ -15,7 +16,7 @@
 .form-color { color: #222; }
 
 body {
-  font-family: 'Nunito', sans-serif;
+  .base-font;
 	overflow: hidden;
 	margin: 0;
 	.font-color;
@@ -84,9 +85,36 @@ textarea.form-control { min-height: 225px; }
 .has-error .form-control, .has-error .form-control:focus { .input-border; }
 
 label { display: none; }
+.mce-edit-area {
+  label {
+    display: block;
+    .font-color!important;
+    opacity: 0.8;
+    .base-font;
+  }
+}
 .fl-form input.fl-input, .fl-form select.fl-select, .fl-form textarea.fl-textarea { margin-bottom: 0; font-size: 14px; .input-border; .form-color; .radius; box-shadow: none; }
 .fl-form .fl-is-active input.fl-input, .fl-form .fl-is-active select.fl-select, .fl-form .fl-is-active textarea.fl-textarea { .input-border; .form-color; }
 .fl-form .fl-has-focus input.fl-input, .fl-form .fl-has-focus select.fl-select, .fl-form .fl-has-focus textarea.fl-textarea { .base-border; }
 .fl-form .fl-has-focus label.fl-label { .base-color; }
 .fl-form .fl-is-active label.fl-label { z-index: 99; }
 .fl-wrap-select:after { display: none; }
+
+.mce-panel { background: #fff; .input-border; .radius; }
+.mce-btn { background: #fff; }
+.mce-toolbar-grp { border: 0; }
+.mce-ico { .font-color; font-size: 12px; text-align: center; }
+.mce-btn button { padding: 2px 6px; }
+.mce-btn-group:not(:first-child) { border-left: 1px solid #e7eaec; }
+.mce-wordcount { .font-color; font-weight: 600; font-size: 12px; opacity: 0.4; }
+.fl-form .fl-has-focus .mce-tinymce { .base-border; }
+
+.fl-form textarea.fl-textarea::-webkit-input-placeholder, .fl-form input.fl-input::-webkit-input-placeholder { .font-color; opacity: .8; }
+.fl-form textarea.fl-textarea:-moz-placeholder, .fl-form input.fl-input:-moz-placeholder { .font-color; opacity: .8; }
+.fl-form textarea.fl-textarea::-moz-placeholder, .fl-form input.fl-input::-moz-placeholder { .font-color; opacity: .8; }
+.fl-form textarea.fl-textarea:-ms-input-placeholder, .fl-form input.fl-input:-ms-input-placeholder { .font-color; opacity: .8; }
+
+.selectize-input input::-webkit-input-placeholder { .font-color; opacity: .8; }
+.selectize-input input:-moz-placeholder { .font-color; opacity: .8; }
+.selectize-input input::-moz-placeholder { .font-color; opacity: .8; }
+.selectize-input input:-ms-input-placeholder { .font-color; opacity: .8; }
