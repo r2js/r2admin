@@ -19,6 +19,7 @@ module.exports = function Admin(app, conf) {
     return log('service [User] not found!');
   }
 
+  process.env.TZ = 'UTC';
   const { baseUrl = 'admin', login = 'login', logout = 'logout' } = conf;
   const viewsPath = `${__dirname}/views`;
 

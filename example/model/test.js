@@ -26,6 +26,7 @@ module.exports = (app) => {
     excerpt: { type: String, field: 'textArea' },
     description: { type: String, field: 'richText' },
     isEnabled: { type: String, default: 'n' },
+    isDeleted: { type: Boolean },
     createdAt: { type: Date },
     expiredAt: { type: Date, field: 'dateTime' },
     workers: [{ type: ObjectId, ref: 'user', display: 'email' }],
@@ -44,6 +45,7 @@ module.exports = (app) => {
       slug: 'Slug',
       description: 'Description',
       isEnabled: 'Is Enabled?',
+      isDeleted: 'Is Deleted?',
       createdAt: 'Created At',
       workerCount: 'Worker Count',
       links: 'Links',
@@ -56,6 +58,7 @@ module.exports = (app) => {
     email: 'email',
     slug: 'alpha_dash',
     isEnabled: 'in:y,n',
+    isDeleted: 'boolean',
   };
 
   Validate(schema, { attributes, rules });

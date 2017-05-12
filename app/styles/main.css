@@ -177,6 +177,9 @@ label {
   opacity: 0.8;
   font-family: 'Nunito', sans-serif;
 }
+.checkbox label {
+  display: inline-block;
+}
 .fl-form input.fl-input,
 .fl-form select.fl-select,
 .fl-form textarea.fl-textarea {
@@ -277,4 +280,14 @@ label {
 .selectize-input input:-ms-input-placeholder {
   color: #575B82;
   opacity: .8;
+}
+.switchery {
+  margin-right: 8px;
+}
+.checkbox label,
+.radio label {
+  padding-left: 2px;
+}
+.checkbox {
+  font-size: 13px;
 }

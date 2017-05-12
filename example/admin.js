@@ -19,8 +19,7 @@ app.start()
     disabled: true,
     models: {
       test: {
-        nav: 'My Test',
-        service: 'Test',
+        nav: 'My Test Model',
       },
     },
   })

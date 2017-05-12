@@ -25,6 +25,9 @@ const vendorStyles = [
   './node_modules/float-labels.js/dist/float-labels.css',
   './node_modules/tinymce/skins/lightgray/skin.min.css',
   './node_modules/tinymce/skins/lightgray/content.min.css',
+  './node_modules/flatpickr/dist/flatpickr.min.css',
+  './public/assets/lib/switchery/dist/switchery.min.css',
+  './node_modules/dropzone/dist/dropzone.css',
 ];
 
 const appStyles = [

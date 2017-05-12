@@ -1,1 +1,11 @@
-image
+<div id="field-{{ name }}" class="form-group {% if errors[name] %}has-error{% endif %}">
+  <label for="f-{{ name }}">{{ label or name }}</label>
+  <div>
+    <div class="f-dropzone dropzone">
+      <div class="dz-message" data-dz-message><span>+</span></div>
+    </div>
+    {% if errors[name] %}
+      <span class="help-block">{{ errors[name] }}</span>
+    {% endif %}
+  </div>
+</div>

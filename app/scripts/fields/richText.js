@@ -35,7 +35,7 @@ import 'tinymce/plugins/placeholder';
 const richText = (selector) => {
   tinymce.init({
     selector,
-    height: '300',
+    height: '200',
     skin: false,
     menubar: false,
     content_css: '/assets/css/richText.css?v=2',
