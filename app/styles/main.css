@@ -26,7 +26,8 @@
   border: 1px solid #e7eaec;
 }
 .font-color {
-  color: #575B82;
+  /*color: #575B82;*/
+  color: #42526e;
 }
 .form-color {
   color: #222;
@@ -35,7 +36,8 @@ body {
   font-family: 'Nunito', sans-serif;
   overflow: hidden;
   margin: 0;
-  color: #575B82;
+  /*color: #575B82;*/
+  color: #42526e;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.525em;
@@ -99,7 +101,8 @@ body {
   border-color: #5c5edc;
 }
 .dummy-logo {
-  background: #F1F5F9;
+  /*background: #F4F5F7;*/
+  background: #FAFCFF;
   z-index: 99;
   border-right: 1px solid #e7eaec;
 }
@@ -107,13 +110,13 @@ body {
   font-weight: 700;
 }
 .menu {
-  background: #F1F5F9;
+  background: #FAFCFF;
   height: calc(100vh);
   top: 0;
   border-right: 1px solid #e7eaec;
 }
 .menu__link {
-  color: #575B82;
+  color: #42526e;
 }
 .menu__wrap {
   top: 105px;
@@ -151,6 +154,18 @@ body {
   border: 1px solid #5c5edc;
   box-shadow: none;
 }
+.selectize-control.multi .selectize-input > div {
+  padding: 1px 4px;
+  background: #e7eaec;
+  color: #42526e;
+}
+.selectize-control.multi .selectize-input > div.active {
+  background: #5c5edc;
+}
+.selectize-dropdown .active {
+  background: #e7eaec;
+  color: #42526e;
+}
 /* form elements */
 textarea {
   resize: none;
@@ -162,7 +177,7 @@ textarea.form-control {
   min-height: 50px;
 }
 .has-error .help-block {
-  color: #FD85A6;
+  color: #FE5671;
 }
 .has-error .form-control,
 .has-error .form-control:focus {
@@ -173,7 +188,8 @@ label {
 }
 .mce-edit-area label {
   display: block;
-  color: #575B82 !important;
+  /*color: #575B82;*/
+  color: #42526e !important;
   opacity: 0.8;
   font-family: 'Nunito', sans-serif;
 }
@@ -226,7 +242,8 @@ label {
   border: 0;
 }
 .mce-ico {
-  color: #575B82;
+  /*color: #575B82;*/
+  color: #42526e;
   font-size: 12px;
   text-align: center;
 }
@@ -237,7 +254,8 @@ label {
   border-left: 1px solid #e7eaec;
 }
 .mce-wordcount {
-  color: #575B82;
+  /*color: #575B82;*/
+  color: #42526e;
   font-weight: 600;
   font-size: 12px;
   opacity: 0.4;
@@ -247,38 +265,46 @@ label {
 }
 .fl-form textarea.fl-textarea::-webkit-input-placeholder,
 .fl-form input.fl-input::-webkit-input-placeholder {
-  color: #575B82;
+  /*color: #575B82;*/
+  color: #42526e;
   opacity: .8;
 }
 .fl-form textarea.fl-textarea:-moz-placeholder,
 .fl-form input.fl-input:-moz-placeholder {
-  color: #575B82;
+  /*color: #575B82;*/
+  color: #42526e;
   opacity: .8;
 }
 .fl-form textarea.fl-textarea::-moz-placeholder,
 .fl-form input.fl-input::-moz-placeholder {
-  color: #575B82;
+  /*color: #575B82;*/
+  color: #42526e;
   opacity: .8;
 }
 .fl-form textarea.fl-textarea:-ms-input-placeholder,
 .fl-form input.fl-input:-ms-input-placeholder {
-  color: #575B82;
+  /*color: #575B82;*/
+  color: #42526e;
   opacity: .8;
 }
 .selectize-input input::-webkit-input-placeholder {
-  color: #575B82;
+  /*color: #575B82;*/
+  color: #42526e;
   opacity: .8;
 }
 .selectize-input input:-moz-placeholder {
-  color: #575B82;
+  /*color: #575B82;*/
+  color: #42526e;
   opacity: .8;
 }
 .selectize-input input::-moz-placeholder {
-  color: #575B82;
+  /*color: #575B82;*/
+  color: #42526e;
   opacity: .8;
 }
 .selectize-input input:-ms-input-placeholder {
-  color: #575B82;
+  /*color: #575B82;*/
+  color: #42526e;
   opacity: .8;
 }
 .switchery {
@@ -300,7 +326,8 @@ label {
   padding: 10px;
 }
 .dropzone .dz-message {
-  color: #575B82;
+  /*color: #575B82;*/
+  color: #42526e;
   text-align: left;
   margin: 0;
   font-size: 14px;

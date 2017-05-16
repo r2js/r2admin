@@ -35,11 +35,11 @@ module.exports = function Admin(app, conf) {
 
   // libraries
   const middleware = libMiddleware(app, conf, viewsPath);
-  const { assignReq } = middleware;
   const auth = libAuth(app, conf);
   const create = libCreate(app, conf);
   const object = libObject(app, conf);
   const file = libFile(app, conf);
+  const { assignReq } = middleware;
 
   app.get(`/${baseUrl}`, assignReq, libIndex(app));
   app.get(`/${baseUrl}/${login}`, assignReq, auth.form);

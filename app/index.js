@@ -7,6 +7,7 @@ import dateBox from './scripts/fields/dateBox';
 import dateTime from './scripts/fields/dateTime';
 import switchery from './scripts/fields/switchery';
 import dropzone from './scripts/fields/dropzone';
+import array from './scripts/fields/array';
 
 const log = debug('r2admin');
 localStorage.debug = '*'; // eslint-disable-line
@@ -24,4 +25,5 @@ $(() => {
   dateTime();
   switchery();
   dropzone();
+  array();
 });
