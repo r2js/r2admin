@@ -1,7 +1,7 @@
 {
   "name": "r2admin",
   "description": "",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Selçuk Fatih Sevinç",
   "license": "MIT",
   "engines": {
@@ -14,6 +14,8 @@
     "glob": "^7.1.1",
     "nunjucks": "^3.0.0",
     "nunjucks-setasync": "^1.0.4",
+    "r2query": "^1.0.3",
+    "r2upload": "^1.0.2",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

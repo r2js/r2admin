@@ -89,6 +89,7 @@ gulp.task('fonts', () => (
     'node_modules/tinymce/skins/lightgray/fonts/**/*',
   ])
     .pipe($.flatten())
+    .pipe(gulp.dest('public/fonts'))
     .pipe(gulp.dest('public/dist/fonts'))
 ));
 

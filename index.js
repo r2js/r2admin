@@ -5,6 +5,7 @@ const libAuth = require('./lib/auth');
 const libMiddleware = require('./lib/middleware');
 const libCreate = require('./lib/create');
 const libObject = require('./lib/object');
+const libFile = require('./lib/file');
 const log = require('debug')('r2:admin');
 
 const toString = Object.prototype.toString;
@@ -14,9 +15,8 @@ module.exports = function Admin(app, conf) {
     return log('admin config not found!');
   }
 
-  const User = app.service('User');
-  if (!User) {
-    return log('service [User] not found!');
+  if (!app.hasServices('Query|User|Upload')) {
+    return false;
   }
 
   process.env.TZ = 'UTC';
@@ -39,15 +39,18 @@ module.exports = function Admin(app, conf) {
   const auth = libAuth(app, conf);
   const create = libCreate(app, conf);
   const object = libObject(app, conf);
+  const file = libFile(app, conf);
 
   app.get(`/${baseUrl}`, assignReq, libIndex(app));
   app.get(`/${baseUrl}/${login}`, assignReq, auth.form);
   app.post(`/${baseUrl}/${login}`, assignReq, auth.login);
   app.get(`/${baseUrl}/${logout}`, assignReq, auth.logout);
+  app.post(`/${baseUrl}/upload`, assignReq, file.upload);
   app.get(`/${baseUrl}/:object/new`, assignReq, create.form);
   app.post(`/${baseUrl}/:object/new`, assignReq, create.object);
   app.get(`/${baseUrl}/:object/search`, assignReq, object.search);
   app.get(`/${baseUrl}/:object/ids`, assignReq, object.ids);
+  app.get(`/${baseUrl}/:object`, assignReq, object.apiQuery);
 
   return middleware;
 };

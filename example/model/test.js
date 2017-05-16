@@ -3,6 +3,7 @@ const idValidator = require('mongoose-id-validator');
 module.exports = (app) => {
   const { Validate } = app.service('System');
   const mongoose = app.service('Mongoose');
+  const query = app.service('Query');
   const ObjectId = mongoose.Schema.Types.ObjectId;
   const { Schema } = mongoose;
 
@@ -35,6 +36,7 @@ module.exports = (app) => {
     votes: { type: [votesSchema] },
     tags: { type: [String] },
     photo: { type: String, field: 'image' },
+    photoArr: { type: [String], field: 'image' },
   });
 
   const attributes = {
@@ -65,6 +67,7 @@ module.exports = (app) => {
   schema.r2options = { attributes, rules };
 
   schema.plugin(idValidator);
+  schema.plugin(query.plugin);
   const model = mongoose.model('test', schema);
   return model;
 };
