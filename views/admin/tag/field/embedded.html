@@ -1,1 +1,11 @@
-embedded - {{ name }} <br>
+{{ name }}
+<hr />
+
+<div class="embedded">
+  {% for k, p in path.schema.paths %}
+    {% set firstChar = k|first %}
+    {% if firstChar !== '_' %}
+      {% field {name: k, parent: name, model: model} %}{% endfield %}
+    {% endif %}
+  {% endfor %}
+</div>

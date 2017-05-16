@@ -183,6 +183,14 @@ textarea.form-control {
 .has-error .form-control:focus {
   border: 1px solid #e7eaec;
 }
+form hr {
+  margin-top: 6px;
+  margin-bottom: 16px;
+  border-top: 1px solid #e7eaec;
+}
+form .embedded {
+  padding: 0 10px 0 10px;
+}
 label {
   display: none;
 }
