@@ -110,7 +110,7 @@ const dropzone = (el) => {
       // TODO: remove file butonu ekle
 
       if (fieldValue) {
-        $.get('/admin/file', { _id: fieldValue }, (res) => {
+        $.get('/admin/file/query', { _id: fieldValue }, (res) => {
           res.data.forEach((item) => {
             const { _id, name, size, path } = item;
             const fileData = {

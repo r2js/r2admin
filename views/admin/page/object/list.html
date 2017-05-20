@@ -1,0 +1,39 @@
+{% set layout = admin.path+'/page/dashboard/index.html' %}
+{% extends override_layout|default(layout) %}
+
+{% block content %}
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 content-body">
+          <table
+            class="data-table"
+            data-url="/admin/{{ object }}/query"
+            data-classes="table table-hover table-condensed"
+            data-striped="true"
+            data-sort-name="_id"
+            data-sort-order="desc"
+            data-search="true"
+            data-show-refresh="true"
+            data-show-toggle="true"
+            data-show-columns="true"
+            data-pagination="true"
+            data-side-pagination="server"
+            data-page-size="30"
+            data-page-list="[10, 20, 50, 100, 200]"
+            data-pagination-v-align="top"
+            data-search-align="left"
+          >
+            <thead>
+              <tr>
+                {% for k, p in paths %}
+                  <th data-field="{{ k }}" data-sortable="true">{{ k }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

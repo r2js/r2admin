@@ -2,6 +2,7 @@ import $ from 'jquery';
 import debug from 'debug';
 import 'selectize';
 
+global.jQuery = $;
 const log = debug('r2admin:field:relation');
 
 const select = (el) => {

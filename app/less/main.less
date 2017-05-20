@@ -68,7 +68,9 @@ body {
   */
   background: #fff;
   padding: 25px 30px;
-  max-width: 960px;
+  form {
+    max-width: 960px;
+  }
 }
 
 /* selectize */
@@ -182,4 +184,32 @@ label { display: none; }
   .file-image { float: left; }
   .file-meta { float: left; padding-left: 6px; width: 85% }
   .file-size { font-size: 10px; padding: 4px 0 0 0; }
+}
+
+.bootstrap-table {
+  .fixed-table-container {
+    border: none;
+  }
+
+  .fixed-table-container thead th {
+    font-family: inherit;
+    border-left: 0;
+  }
+
+  .fixed-table-container thead th .both:not(.desc):not(.asc) {
+    background: none;
+  }
+
+  .fixed-table-container tbody td {
+    border-left: 1px solid #e7eaec;
+  }
+
+  .fixed-table-container tbody td:first-child {
+    border-left: none;
+  }
+
+  .fixed-table-pagination {
+    padding: 8px 0 8px 0;
+    font-size: 13px;
+  }
 }

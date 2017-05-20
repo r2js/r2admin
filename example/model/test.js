@@ -61,6 +61,9 @@ module.exports = (app) => {
     slug: 'alpha_dash',
     isEnabled: 'in:y,n',
     isDeleted: 'boolean',
+    links: {
+      web: 'required',
+    },
   };
 
   Validate(schema, { attributes, rules });
