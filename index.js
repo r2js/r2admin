@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require('path');
+const expressNunjucks = require('express-nunjucks');
 const libIndex = require('./lib/index');
 const libAuth = require('./lib/auth');
 const libMiddleware = require('./lib/middleware');
@@ -16,32 +16,43 @@ module.exports = function Admin(app, conf) {
     return log('admin config not found!');
   }
 
-  if (!app.hasServices('Query|User|Upload')) {
+  if (getConfig.disabled) {
+    return log('admin ui is disabled');
+  }
+
+  if (!app.hasServices('Nunjucks|Query|User|Upload')) {
     return false;
   }
 
-  process.env.TZ = 'UTC';
+  // config vars
   const { baseUrl = 'admin', login = 'login', logout = 'logout' } = conf;
-  const viewsPath = `${__dirname}/views`;
 
   // set views directory
+  const viewsPath = `${__dirname}/views`;
   let views = app.get('views');
   views = toString.call(views) === '[object String]' ? [views] : views;
   views = views.concat([viewsPath]);
   app.set('views', views);
 
-  // static middleware
-  const staticDir = path.dirname(process.cwd());
-  app.use(express.static(`${staticDir}/public`, { maxAge: '1d' }));
+  // reinit nunjucks with multiple views directories
+  const isDev = app.get('env') === 'development';
+  const njk = expressNunjucks(app, {
+    watch: isDev,
+    noCache: isDev,
+  });
+
+  // admin assets
+  app.use(express.static(`${__dirname}/public`, { maxAge: '1d' }));
 
   // libraries
-  const middleware = libMiddleware(app, conf, viewsPath);
-  const auth = libAuth(app, conf);
-  const create = libCreate(app, conf);
-  const read = libRead(app, conf);
-  const object = libObject(app, conf);
-  const file = libFile(app, conf);
+  libMiddleware(app, getConfig, viewsPath, njk);
+  const auth = libAuth(app, getConfig);
+  const create = libCreate(app, getConfig);
+  const read = libRead(app, getConfig);
+  const object = libObject(app, getConfig);
+  const file = libFile(app, getConfig);
 
+  // routes
   app.get(`/${baseUrl}`, libIndex(app));
   app.get(`/${baseUrl}/${login}`, auth.form);
   app.post(`/${baseUrl}/${login}`, auth.login);
@@ -53,6 +64,4 @@ module.exports = function Admin(app, conf) {
   app.get(`/${baseUrl}/:object/ids`, object.ids);
   app.get(`/${baseUrl}/:object/query`, object.apiQuery);
   app.get(`/${baseUrl}/:object`, read.object);
-
-  return middleware;
 };

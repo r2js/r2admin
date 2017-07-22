@@ -7,10 +7,11 @@ const r2system = require('r2system');
 const r2user = require('r2user');
 const r2query = require('r2query');
 const r2upload = require('r2upload');
+const r2nunjucks = require('r2nunjucks');
 const r2admin = require('../index');
 
 process.chdir(__dirname);
-const app = r2base({ baseDir: __dirname });
+const app = r2base();
 
 app.start()
   .serve(r2middleware)
@@ -25,20 +26,25 @@ app.start()
     base: 'public',
   })
   .use(express.static(`${__dirname}/public`, { maxAge: '1d' }))
+  .serve(r2nunjucks)
   .serve(r2admin, {
-    disabled: true,
+    // disabled: false,
     models: {
       test: {
         nav: 'My Test Model',
+      },
+      test2: {
+        nav: 'My Test Model 2',
       },
     },
   })
   .listen();
 
-const User = app.service('User');
-User.registerVerified({ email: 'admin@test.com', passwd: '1234' }).then().catch();
-User.registerVerified({ email: 'user1@test.com', passwd: '1234' }).then().catch();
-User.registerVerified({ email: 'user2@test.com', passwd: '1234' }).then().catch();
-User.registerVerified({ email: 'user3@test.com', passwd: '1234' }).then().catch();
-User.registerVerified({ email: 'user4@test.com', passwd: '1234' }).then().catch();
-User.registerVerified({ email: 'user5@test.com', passwd: '1234' }).then().catch();
+const { Users } = app.service('System');
+Users.create({ email: 'admin@test.com', passwd: '1234', isEnabled: true, isVerified: true })
+  .then(() => Users.create({ email: 'user1@test.com', passwd: '1234', isEnabled: true, isVerified: true }))
+  .then(() => Users.create({ email: 'user2@test.com', passwd: '1234', isEnabled: true, isVerified: true }))
+  .then(() => Users.create({ email: 'user3@test.com', passwd: '1234', isEnabled: true, isVerified: true }))
+  .then(() => Users.create({ email: 'user4@test.com', passwd: '1234', isEnabled: true, isVerified: true }))
+  .then(() => Users.create({ email: 'user5@test.com', passwd: '1234', isEnabled: true, isVerified: true }))
+  .catch();
