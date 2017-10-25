@@ -1,0 +1,10 @@
+{% macro parse(name, help, errors, errorClass) %}
+  {% if help or errors[name] %}
+  <span class="help-block">
+    {% if help %}{{ help | safe }}{% endif %}
+    {% if errors[name] %}
+      <span class="{{ errorClass or 'error' }}">{{ errors[name].message or errors[name] }}</span>
+    {% endif %}
+  </span>
+  {% endif %}
+{% endmacro %}

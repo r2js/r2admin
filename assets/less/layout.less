@@ -1,0 +1,59 @@
+body {
+  .base-font;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+td, th {
+  .base-font;
+}
+
+footer {
+  .absolute;
+  z-index: 9;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+/* Overrides */
+
+.container-fluid {
+  max-width: 1170px;
+}
+
+.help-block { // forms
+  .font(12px);
+}
+
+
+/* Wrapper */
+
+.wrapper {
+	overflow-y: auto;
+	height: 100vh;
+  padding: 0;
+}
+
+
+/* Content */
+
+.content {
+  .relative;
+  min-height: 300px;
+  margin: 65px 0 0 260px;
+}
+
+
+/* Header */
+
+.header {
+	display: -webkit-flex;
+  display: flex;
+
+  .navbar {
+    margin-left: 260px;
+    background: transparent;
+  }
+}

@@ -1,0 +1,30 @@
+{% import './help.html' as helpMacro %}
+
+<div id="field-{{ name }}" class="form-group {{ formClass }} {% if errors[name] %}has-error{% endif %}">
+  <label for="f-{{ name }}">{{ label or placeholder or name }}</label>
+  <div>
+    {% set optData = optData or pathOpts.enumOptions %}
+
+    {% set dataValue = data[name] %}
+    {% if data.get %}
+      {% set dataValue = data.get('_'+name) or data.get(name) %}
+    {% endif %}
+
+    <select
+      name="{{ name }}"
+      id="f-{{ name }}"
+      data-placeholder="{{ placeholder or name }}"
+      data-value="{{ dataValue }}"
+      class="{{ class or 'f-select' }}"
+      style="visibility:hidden;display:none;">
+      {% set emptyArr = [] %}
+      {% set dataArr = emptyArr.concat(optData) %}
+      <option value=""></option>
+      {% for d in dataArr %}
+        <option value="{{ d.code or d.val }}">{{ d.name }}</option>
+      {% endfor %}
+    </select>
+
+    {{ helpMacro.parse(name, help, errors, errorClass) }}
+  </div>
+</div>

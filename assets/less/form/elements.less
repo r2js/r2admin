@@ -1,0 +1,78 @@
+/* Form Elements */
+
+.form-group {
+  min-height: 44px;
+}
+
+.form-control {
+  .input-border;
+  .radius;
+  height:44px;
+  box-shadow: none;
+
+  &:focus {
+    .base-border;
+  }
+}
+
+.has-error {
+  .help-block {
+    color: inherit;
+  }
+
+  .help-block .error {
+    color: @error;
+  }
+
+  .form-control {
+    .input-border;
+
+    &:focus {
+      .input-border;
+      box-shadow: none;
+    }
+  }
+}
+
+.field-search-term {
+  margin-bottom: 0!important;
+  height: auto;
+  min-height: 34px;
+
+  input {
+    height: 34px;
+    border-radius: 100px!important;
+  }
+}
+
+.search-form-wrapper .Badge {
+  text-transform: none!important;
+}
+
+small {
+  font-size: 80%;
+}
+
+textarea {
+  resize: none;
+}
+
+textarea.form-control {
+  min-height: 312px;
+}
+
+form {
+  .embedded {
+    padding: 0 10px 0 10px;
+  }
+}
+
+label {
+  .none;
+}
+
+.form-checkbox-list {
+  .form-group {
+    margin-bottom: 0;
+  }
+}

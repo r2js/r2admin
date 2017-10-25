@@ -1,0 +1,44 @@
+{% import "admin/macro/object.html" as objectMacro %}
+
+{% extends 'admin/object/index.html' %}
+
+{% block navbarHeader %}
+<a class="navbar-brand" href="/{{ admin.baseUrl }}/{{ object }}">
+  <i class="fal fa-arrow-alt-left min-w1 w-auto color-violet"></i> Test
+</a>
+{% endblock %}
+
+{% block content %}
+  <div class="content">
+    <div class="post-wrapper">
+      <div class="container-fluid">
+
+        <div class="Card interactive">
+          <div>
+            <div class="row item-header">
+              <div class="col-md-8">{% if type === 'update' %}Edit{% else %}New{% endif %} Test</div>
+              <div class="col-md-4"></div>
+            </div>
+          </div>
+
+          <form role="form" action="/{{ admin.baseUrl }}/{{ object }}/{% if type === 'update' %}{{ objectId }}{% else %}new{% endif %}" method="POST">
+            <div class="row margin-0 pt-3 pb-3 form-block">
+              <div class="col-md-6">
+                {% field {name: 'name', model: 'test', placeholder: 'Name', help: '<span class="Badge negative"> GEREKLİ </span>'} %}{% endfield %}
+                {% field {name: 'email', model: 'test', placeholder: 'Email'} %}{% endfield %}
+              </div>
+            </div>
+
+            <div class="row margin-0 pt-2 pb-2">
+              <div class="col-md-12">
+                <button class="Button positive" type="submit">SAVE</button>
+                <a href="/{{ admin.baseUrl }}/{{ object }}" class="Button">CANCEL</a>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

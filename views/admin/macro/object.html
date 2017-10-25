@@ -1,0 +1,26 @@
+{% macro paginate(obj, baseUrl, pageCount) %}
+  {% if pageCount > 1 %}
+    <div class="ButtonGroup">
+      {% for o in obj %}
+        {% if o.type == 'FIRST_PAGE_LINK' or o.type == 'PREVIOUS_PAGE_LINK' or o.type == 'NEXT_PAGE_LINK' or o.type == 'LAST_PAGE_LINK' %}
+            <a class="Button {% if o.isActive === true %}is-disabled{% endif %}" href="{{ baseUrl }}{{ o.value }}" aria-label="{{ o.type }}">
+              <span aria-hidden="true">
+                {% if o.type == 'FIRST_PAGE_LINK' %}&laquo;{% endif %}
+                {% if o.type == 'PREVIOUS_PAGE_LINK' %}&lsaquo;{% endif %}
+                {% if o.type == 'NEXT_PAGE_LINK' %}&rsaquo;{% endif %}
+                {% if o.type == 'LAST_PAGE_LINK' %}&raquo;{% endif %}
+              </span>
+            </a>
+        {% elseif o.type == 'ELLIPSIS' %}
+            <a class="Button {% if o.isActive === true %}is-disabled{% endif %}" href="{{ baseUrl }}{{ o.value }}" aria-label="{{ o.type }}">
+              <span aria-hidden="true">&hellip;</span>
+            </a>
+        {% else %}
+          <a class="Button {% if o.isActive === true %}active{% endif %}" href="{{ baseUrl }}{{ o.value }}">
+            {{ o.value }}
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endmacro %}

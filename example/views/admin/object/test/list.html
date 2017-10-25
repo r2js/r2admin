@@ -1,0 +1,79 @@
+{% import "admin/macro/object.html" as objectMacro %}
+
+{% extends 'admin/object/index.html' %}
+
+{% block navbarHeader %}
+  <a class="navbar-brand" href="/{{ admin.baseUrl }}/{{ object }}">
+    <i class="fal fa-user-alt min-w1 w-auto color-violet"></i> Test
+  </a>
+{% endblock %}
+
+{% block content %}
+  {% paginate {}, {}, {limit: 20} %}{% endpaginate %}
+
+  <div class="content">
+    <div class="post-wrapper">
+      <div class="container-fluid">
+
+        <div class="Card interactive">
+          <div>
+            <div class="row item-header">
+              <div class="col-md-4 search-form-wrapper">
+                <form role="form" class="search-form" action="/{{ admin.baseUrl }}/{{ object }}" method="GET">
+                  {% string 'search-term', {fieldName: 'term', placeholder: 'search', autocomplete: 'off'} %}{% endstring %}
+                </form>
+
+                {% if req.query and req.query.term %}
+                  <span class="Badge size2 positive mt-1">{{ req.query.term }}&nbsp;<a href="/{{ admin.baseUrl }}/{{ object }}"><i class="fal fa-times min-w1 w-auto"></i></a></span>
+                {% endif %}
+              </div>
+              <div class="col-md-8 ta-right">
+                <a href="/{{ admin.baseUrl }}/{{ object }}/new" class="Button positive">
+                  <i class="fal fa-plus min-w1 w-auto"></i>&nbsp;TEST
+                </a>
+              </div>
+            </div>
+
+            <div class="row item-list-header">
+              <div class="col-md-5">NAME</div>
+              <div class="col-md-5 ta-right">EMAIL</div>
+              <div class="col-md-2 ta-right">ACTIONS</div>
+            </div>
+          </div>
+
+          <div class="">
+            {% if modelData[object].docs.length %}
+              {% for doc in modelData[object].docs %}
+                <div class="row item-list pt-2 pb-2" data-id="{{ doc.id }}">
+                  <div class="col-md-5"><a class="editable" href="/{{ admin.baseUrl }}/{{ object }}/{{ doc.id }}">{{ doc.name }}</a></div>
+                  <div class="col-md-5 ta-right">{{ doc.email }}</div>
+                  <div class="col-md-2 ta-right">
+                    <div class="mono">
+                      total: {{ doc.patch }}<br>
+                      {{ doc.updatedAt | date('DD/MM/YYYY HH:mm') }}<br>
+                      {% if doc.lastPatches and doc.lastPatches.length %}
+                        {{ doc.lastPatches[0].actor.name or doc.lastPatches[0].actor.email }}
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            {% else %}
+              <div align="center" class="pl-5 pr-5 pb-6 pt-7">
+                <div class="color-amber">
+                  <h2 class="Heading size2"><i class="fal fa-exclamation-triangle min-w1 w-auto"></i> Tests not found!</h2>
+                </div>
+            {% endif %}
+          </div>
+
+          <div class="row margin-0 pt-2 pb-2">
+            <div class="col-md-12">
+              {{ objectMacro.paginate(modelData[object].pageObj, modelData[object].baseUrl, modelData[object].pages) }}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,76 @@
+/* Float Labels */
+
+.fl-form input.fl-input,
+.fl-form select.fl-select,
+.fl-form textarea.fl-textarea {
+  .input-border;
+  .form-color;
+  .radius;
+  .font(14px);
+  margin-bottom: 0;
+  box-shadow: none;
+}
+
+.fl-form .fl-is-active input.fl-input,
+.fl-form .fl-is-active select.fl-select,
+.fl-form .fl-is-active textarea.fl-textarea {
+  .input-border;
+  .form-color;
+}
+
+.fl-form .fl-has-focus input.fl-input,
+.fl-form .fl-has-focus select.fl-select,
+.fl-form .fl-has-focus textarea.fl-textarea {
+  .base-border;
+}
+
+.fl-form .fl-has-focus label.fl-label {
+  .base-color;
+}
+
+.fl-form .fl-is-active label.fl-label {
+  z-index: 99;
+}
+
+.fl-wrap-select:after {
+  .none;
+}
+
+.fl-form .fl-wrap-select:after {
+  .none;
+} /* float-labes.js select box için arrow ekliyor, gösterme */
+
+.fl-form label.fl-label {
+  .font(12px);
+  font-weight: 500;
+  color: @lightGray;
+}
+
+.fl-form.fl-style-1 .fl-is-active label.fl-label {
+
+}
+
+.label-opacity {
+  .font-color;
+  opacity: .8;
+}
+
+.fl-form textarea.fl-textarea::-webkit-input-placeholder,
+.fl-form input.fl-input::-webkit-input-placeholder {
+  .label-opacity;
+}
+
+.fl-form textarea.fl-textarea:-moz-placeholder,
+.fl-form input.fl-input:-moz-placeholder {
+  .label-opacity;
+}
+
+.fl-form textarea.fl-textarea::-moz-placeholder,
+.fl-form input.fl-input::-moz-placeholder {
+  .label-opacity;
+}
+
+.fl-form textarea.fl-textarea:-ms-input-placeholder,
+.fl-form input.fl-input:-ms-input-placeholder {
+  .label-opacity;
+}

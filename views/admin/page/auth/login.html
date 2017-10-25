@@ -2,18 +2,20 @@
 {% block head %}{{ super() }}{% endblock %}
 
 {% block page %}
-<body class="admin-body-login">
-  <div class="container">
+<body>
+  <div class="container admin-login">
     <div class="row">
       <div class="col-md-4"></div>
       <div class="col-md-4">
-        <div class="form-wrapper animated fadeInDown">
-          <h2 class="title">r2</h2>
-          <form role="form" action="/{{ admin.baseUrl }}/{{ admin.login }}" method="POST">
-            {% string 'email',{label: false, placeholder: 'Email'} %}{% endstring %}
-            {% password 'passwd',{label: false, placeholder: 'Password'} %}{% endpassword %}
-            {% submit 'Login',{} %}{% endsubmit %}
-          </form>
+        <div class="box-wrapper">
+          <div class="title-wrapper"></div>
+          <div class="form-wrapper Card interactive padding-3">
+            <form role="form" action="/{{ admin.baseUrl }}/{{ admin.login }}" method="POST">
+              {% string 'email', {placeholder: 'Email'} %}{% endstring %}
+              {% password 'passwd', {placeholder: 'Password'} %}{% endpassword %}
+              {% submit 'LOGIN', {class: 'PillButton violet'} %}{% endsubmit %}
+            </form>
+          </div>
         </div>
       </div>
     </div>

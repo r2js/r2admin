@@ -1,31 +1,36 @@
 const express = require('express');
 const expressNunjucks = require('express-nunjucks');
 const libIndex = require('./lib/index');
-const libAuth = require('./lib/auth');
 const libMiddleware = require('./lib/middleware');
-const libCreate = require('./lib/create');
+const libExtension = require('./lib/extension');
+const libAuth = require('./lib/auth');
 const libRead = require('./lib/read');
-const libObject = require('./lib/object');
-const libFile = require('./lib/file');
+const libCreate = require('./lib/create');
+const libUpdate = require('./lib/update');
 const log = require('debug')('r2:admin');
 
 const toString = Object.prototype.toString;
-module.exports = function Admin(app, conf) {
-  const getConfig = conf || app.config('admin');
-  if (!getConfig) {
-    return log('admin config not found!');
+module.exports = function AdminService(app, config) {
+  const getConf = config || app.config('admin');
+  if (!getConf) {
+    return log('config not found!');
   }
 
-  if (getConfig.disabled) {
-    return log('admin ui is disabled');
+  if (!getConf.enabled) {
+    return log('ui is not enabled');
   }
 
-  if (!app.hasServices('Nunjucks|Query|User|Upload')) {
+  if (!app.hasServices('Nunjucks|User')) {
     return false;
   }
 
   // config vars
-  const { baseUrl = 'admin', login = 'login', logout = 'logout' } = conf;
+  const {
+    routes = true,
+    baseUrl = 'admin',
+    login = 'login',
+    logout = 'logout',
+  } = getConf;
 
   // set views directory
   const viewsPath = `${__dirname}/views`;
@@ -41,27 +46,37 @@ module.exports = function Admin(app, conf) {
     noCache: isDev,
   });
 
-  // admin assets
-  app.use(express.static(`${__dirname}/public`, { maxAge: '1d' }));
+  const router = express.Router();
 
   // libraries
-  libMiddleware(app, getConfig, viewsPath, njk);
-  const auth = libAuth(app, getConfig);
-  const create = libCreate(app, getConfig);
-  const read = libRead(app, getConfig);
-  const object = libObject(app, getConfig);
-  const file = libFile(app, getConfig);
+  libMiddleware(app, getConf, viewsPath, router);
+  libExtension(app, njk);
+  const auth = libAuth(app, getConf);
+  const read = libRead(app, getConf);
+  const create = libCreate(app, getConf);
+  const update = libUpdate(app, getConf);
 
   // routes
-  app.get(`/${baseUrl}`, libIndex(app));
-  app.get(`/${baseUrl}/${login}`, auth.form);
-  app.post(`/${baseUrl}/${login}`, auth.login);
-  app.get(`/${baseUrl}/${logout}`, auth.logout);
-  app.post(`/${baseUrl}/upload`, file.upload);
-  app.get(`/${baseUrl}/:object/new`, create.form);
-  app.post(`/${baseUrl}/:object/new`, create.object);
-  app.get(`/${baseUrl}/:object/search`, object.search);
-  app.get(`/${baseUrl}/:object/ids`, object.ids);
-  app.get(`/${baseUrl}/:object/query`, object.apiQuery);
-  app.get(`/${baseUrl}/:object`, read.object);
+  let initRoutes;
+  const setRoutes = (routerInstance) => {
+    routerInstance.get('/', libIndex(app));
+    routerInstance.get(`/${login}`, auth.form);
+    routerInstance.post(`/${login}`, auth.login);
+    routerInstance.get(`/${logout}`, auth.logout);
+    routerInstance.get('/:object', read.object);
+    routerInstance.get('/:object/new', create.form);
+    routerInstance.post('/:object/new', create.object);
+    routerInstance.get('/:object/search', read.search);
+    routerInstance.get('/:object/:id', update.form);
+    routerInstance.post('/:object/:id', update.object);
+  };
+
+  if (routes) {
+    setRoutes(router);
+  } else {
+    initRoutes = setRoutes;
+  }
+
+  app.use(`/${baseUrl}`, router);
+  return { router, initRoutes };
 };

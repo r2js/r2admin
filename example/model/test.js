@@ -1,9 +1,7 @@
-const idValidator = require('mongoose-id-validator');
-
 module.exports = (app) => {
   const { Validate } = app.service('System');
   const mongoose = app.service('Mongoose');
-  const query = app.service('Query');
+  const Plugin = app.service('PluginService');
   const ObjectId = mongoose.Schema.Types.ObjectId;
   const { Schema } = mongoose;
 
@@ -37,6 +35,8 @@ module.exports = (app) => {
     tags: { type: [String] },
     photo: { type: String, field: 'image' },
     photoArr: { type: [String], field: 'image' },
+  }, {
+    timestamps: true,
   });
 
   const attributes = {
@@ -61,16 +61,11 @@ module.exports = (app) => {
     slug: 'alpha_dash',
     isEnabled: 'in:y,n',
     isDeleted: 'boolean',
-    links: {
-      web: 'required',
-    },
   };
 
   Validate(schema, { attributes, rules });
   schema.r2options = { attributes, rules };
 
-  schema.plugin(idValidator);
-  schema.plugin(query.plugin);
-  const model = mongoose.model('test', schema);
-  return model;
+  Plugin.plugins(schema, { patchHistory: { name: 'test' }, modelPatches: true });
+  return mongoose.model('test', schema);
 };

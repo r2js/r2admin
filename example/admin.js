@@ -6,7 +6,7 @@ const r2acl = require('r2acl');
 const r2system = require('r2system');
 const r2user = require('r2user');
 const r2query = require('r2query');
-const r2upload = require('r2upload');
+const r2plugin = require('r2plugin');
 const r2nunjucks = require('r2nunjucks');
 const r2admin = require('../index');
 
@@ -15,29 +15,16 @@ const app = r2base();
 
 app.start()
   .serve(r2middleware)
-  .serve(r2mongoose, { database: 'r2admin', debug: true })
+  .serve(r2mongoose)
   .serve(r2acl)
   .serve(r2system)
   .serve(r2query)
+  .serve(r2plugin)
   .load('model')
-  .serve(r2user, { jwt: { secret: '1234', expiresIn: 7 } })
-  .serve(r2upload, {
-    dir: 'public/upload',
-    base: 'public',
-  })
+  .serve(r2user)
   .use(express.static(`${__dirname}/public`, { maxAge: '1d' }))
   .serve(r2nunjucks)
-  .serve(r2admin, {
-    // disabled: false,
-    models: {
-      test: {
-        nav: 'My Test Model',
-      },
-      test2: {
-        nav: 'My Test Model 2',
-      },
-    },
-  })
+  .serve(r2admin)
   .listen();
 
 const { Users } = app.service('System');

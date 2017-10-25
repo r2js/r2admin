@@ -1,9 +1,0 @@
-<div id="field-{{ name }}" class="form-group {% if errors[name] %}has-error{% endif %}">
-  <label for="f-{{ name }}">{{ label or name }}</label>
-  <div>
-    <input name="{{ name }}" id="f-{{ name }}" type="text" class="f-datebox form-control" value="{{ data[name] }}" placeholder="{{ placeholder or name }}" />
-    {% if errors[name] %}
-      <span class="help-block">{{ errors[name] }}</span>
-    {% endif %}
-  </div>
-</div>

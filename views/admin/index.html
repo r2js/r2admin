@@ -1,0 +1,81 @@
+{% extends admin.path+'/layout.html' %}
+{% block head %}{{ super() }}{% endblock %}
+
+{% block page %}
+<body>
+  <div class="wrapper">
+
+    <header class="header cf">
+      <div class="header">
+        <nav class="navbar navbar-fixed-top">
+          <!-- .navbar-header -->
+          <div class="navbar-header">
+            {% block navbarHeader %}
+              <a class="navbar-brand" href="/admin">
+                <i class="fal fa-home min-w1 w-auto"></i> Project
+              </a>
+            {% endblock %}
+          </div>
+          <!--/.navbar-header -->
+
+          <!-- .navbar -->
+          <div id="navbar" class="navbar-collapse collapse">
+            {% block navbar %}
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                  <a href="/admin/logout"><i class="fal fa-sign-out min-w1 w-auto"></i>
+                    {% block logout %}Logout{% endblock %}
+                  </a>
+                </li>
+              </ul>
+            {% endblock %}
+          </div>
+          <!--/.navbar -->
+        </nav>
+      </div>
+    </header>
+
+    <nav id="menu" class="menu">
+      {% block logo %}
+        <div class="logo">
+          <h3 class="logo-customer"><a href="/{{ admin.baseUrl }}">Customer</a></h3>
+        </div>
+      {% endblock %}
+
+      {% block nav %}
+        <div class="menu-wrap">
+          <ul data-menu="main" class="menu-level" tabindex="-1" role="menu" aria-label="All">
+            {% block navStart %}{% endblock %}
+
+            {% block navDashboard %}
+            <li class="menu-item" role="menuitem">
+              <a class="menu-link {% if urlPath === ('/'+admin.baseUrl) %}active{% endif %} " href="/{{ admin.baseUrl }}">
+                <i class="fal fa-tachometer-alt min-w1 w-auto"></i> Dashboard
+              </a>
+            </li>
+            {% endblock %}
+
+            {% block navModels %}
+              {% for navKey, m in admin.conf.models %}
+                {% if m.disable !== true %}
+                <li class="menu-item" role="menuitem">
+                  <a class="menu-link {% if urlPath.includes('/'+navKey) %}active{% endif %}" href="/{{ admin.baseUrl }}/{{ navKey }}">
+                    {% if m.icon %}<i class="fal fa-{{ m.icon }} min-w1 w-auto"></i>{% endif %}
+                    {{ m.nav or k }}
+                  </a>
+                  {% block navKey %}{% endblock %}
+                </li>
+                {% endif %}
+              {% endfor %}
+            {% endblock %}
+
+            {% block navEnd %}{% endblock %}
+          </ul>
+        </div>
+      {% endblock %}
+    </nav>
+
+    {% block content %}{% endblock %}
+  </div>
+</body>
+{% endblock %}

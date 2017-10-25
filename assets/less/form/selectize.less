@@ -1,0 +1,63 @@
+/* Selectize */
+
+.selectize-input {
+  .input-border;
+  .radius;
+  .form-color;
+  .font(14px);
+  min-height: 44px;
+  padding: 11px 12px;
+}
+
+.has-error .selectize-input {
+  .input-border;
+  box-shadow: none;
+}
+
+.selectize-dropdown,
+.selectize-input,
+.selectize-input input {
+  .form-color;
+}
+
+.selectize-input.focus {
+  .base-border;
+  box-shadow: none;
+}
+
+.selectize-control.multi {
+  .selectize-input.has-items {
+    padding: 10px 12px 8px;
+  }
+
+  .selectize-input>div {
+    padding: 1px 4px;
+    background: @lightBlue;
+    color: @mediumBlue;
+  }
+
+  .selectize-input>div.active {
+    background: @baseColor;
+  }
+}
+
+.selectize-dropdown {
+  .active {
+    background: @lightBlue;
+    color: @mediumBlue;
+  }
+}
+
+.input-opacity {
+  .font-color;
+  opacity: .8;
+}
+
+.selectize-input {
+  input::-webkit-input-placeholder,
+  input:-moz-placeholder,
+  input::-moz-placeholder,
+  input:-ms-input-placeholder {
+    .input-opacity;
+  }
+}

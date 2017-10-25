@@ -1,0 +1,162 @@
+/* Resets */
+
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+
+
+/* Main Elements */
+
+body {
+  overflow: auto;
+  margin: 0;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+	text-decoration: none;
+  outline: none;
+}
+
+a:hover,
+a:focus,
+a:active {
+  color: inherit;
+}
+
+/* Helpers */
+
+.cf:before,
+.cf:after {
+	content: ' ';
+	.table;
+}
+
+.cf:after {
+	.clear;
+}
+
+.container-fluid {
+  padding-bottom: 40px;
+}
+
+.mono {
+  font-family: 'Inconsolata', 'Courier New', Courier, monospace;
+  font-size: 11px;
+  color: @lightGray;
+}
+
+/* Button */
+
+.Button, .PillButton {
+  text-transform: none;
+}
+
+.Button.active {
+  background-color: #f0f9ff;
+  color: #0068b3;
+}
+
+
+/* Card */
+
+.Card.interactive {
+  &:active, &:hover {
+    .transform(none);
+  }
+}
+
+/* Items */
+
+.item-header {
+  margin: 0 0 0 0;
+  .font(16px);
+  font-weight: 500;
+  padding: 0;
+  margin: 18px 0 18px 0;
+
+  small {
+    font-size: 12px;
+  }
+}
+
+.item-list-header {
+  margin: 0 0 0 0;
+  .font(11px);
+  letter-spacing: 1px;
+  font-weight: 700;
+  line-height: 40px;
+  background: @lightBg;
+  border-bottom: 1px solid @lightBlue;
+  border-top: 1px solid @lightBlue;
+}
+
+.item-list {
+  margin: 0 0 0 0;
+  line-height: 15px;
+  border-bottom: 1px solid @lightBlue;
+  align-items: center;
+  display: flex;
+
+  .form-group {
+    line-height: 12px;
+    margin-bottom: 0;
+  }
+
+  .checkbox {
+    line-height: 45px;
+    margin: 0;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+a.editable:hover,
+a.editable:focus,
+a.editable:active {
+  color: @baseColor;
+}
+
+
+/* Navbar */
+
+#navbar {
+  padding-right: 15px;
+}
+
+.navbar-brand {
+  padding: 0 15px 0 15px;
+  line-height: 50px;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+  background: transparent;
+  color: @baseColor;
+}
+
+
+/* Form */
+
+.error.Badge.negative {
+  text-transform: none;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-block {
+  background: @lightBg;
+  border-top: 1px solid @lightBlue;
+  border-bottom: 1px solid @lightBlue;
+}
+
+.has-error .form-control:focus {
+  box-shadow: none;
+}

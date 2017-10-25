@@ -1,0 +1,25 @@
+{% import './help.html' as helpMacro %}
+
+{% set dataValue = data[name] %}
+{% if data.get %}
+  {% set dataValue = data.get('_'+name) or data.get(name) %}
+{% endif %}
+
+<div id="field-{{ name }}" class="form-group{% if errors[name] %}has-error{% endif %}">
+  <div class="checkbox">
+      <label for="f-{{ name }}"></label>
+      <input name="{{ name }}" type="hidden" disabled="disabled" value="{{ dataValue }}" />
+      <input
+        name="{{ name }}"
+        id="f-{{ name }}"
+        data-value="{{ dataValue }}"
+        value="true"
+        type="checkbox"
+        class="{{ class or 'f-boolean' }} no-label"
+        {% if dataValue or checked %}checked{% endif %}
+        style="visibility:hidden;display:none;" />
+      {{ placeholder or name }}
+      {{ helpMacro.parse(name, help, errors, errorClass) }}
+  </div>
+</div>
+
