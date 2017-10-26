@@ -12,6 +12,7 @@ const minifyCSS = require('gulp-minify-css');
 // node_modules/gulp/bin/gulp.js --cwd "./example" run
 
 const basePath = process.env.BASEPATH || __dirname;
+const vendorPath = process.env.VENDORPATH || __dirname;
 const appPath = process.cwd();
 
 const vendors = [
@@ -57,13 +58,14 @@ const vendors = [
 ];
 
 const vendorStyles = [
-  `${basePath}/node_modules/bootstrap/dist/css/bootstrap.min.css`,
-  `${basePath}/node_modules/selectize/dist/css/selectize.bootstrap3.css`,
-  `${basePath}/node_modules/float-labels.js/dist/float-labels.css`,
-  `${basePath}/node_modules/tinymce/skins/lightgray/skin.min.css`,
-  `${basePath}/node_modules/tinymce/skins/lightgray/content.min.css`,
-  `${basePath}/node_modules/flatpickr/dist/flatpickr.min.css`,
-  `${basePath}/node_modules/noty/lib/noty.css`,
+  `${vendorPath}/node_modules/bootstrap/dist/css/bootstrap.min.css`,
+  `${vendorPath}/node_modules/selectize/dist/css/selectize.bootstrap3.css`,
+  `${vendorPath}/node_modules/float-labels.js/dist/float-labels.css`,
+  `${vendorPath}/node_modules/tinymce/skins/lightgray/skin.min.css`,
+  `${vendorPath}/node_modules/tinymce/skins/lightgray/content.min.css`,
+  `${vendorPath}/node_modules/flatpickr/dist/flatpickr.min.css`,
+  `${vendorPath}/node_modules/noty/lib/noty.css`,
+  // from basePath
   `${basePath}/assets/lib/switchery/dist/switchery.min.css`,
   `${basePath}/assets/lib/fontawesome-5/fontawesome-pro-core.css`,
   `${basePath}/assets/lib/fontawesome-5/fontawesome-pro-light.css`,
@@ -127,8 +129,8 @@ gulp.task('setup', () => {
 gulp.task('fonts', () => (
   gulp.src([
     `${appPath}/app/font/**/*`,
-    './node_modules/bootstrap/dist/fonts/**/*',
-    './node_modules/tinymce/skins/lightgray/fonts/**/*',
+    `${vendorPath}/node_modules/bootstrap/dist/fonts/**/*`,
+    `${vendorPath}/node_modules/tinymce/skins/lightgray/fonts/**/*`,
     `${basePath}/assets/lib/fontawesome-5/fonts/**/*`,
   ])
     .pipe($.flatten())
