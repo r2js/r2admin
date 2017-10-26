@@ -11,7 +11,7 @@ const minifyCSS = require('gulp-minify-css');
 // NOTE: run example
 // node_modules/gulp/bin/gulp.js --cwd "./example" run
 
-const basePath = __dirname;
+const basePath = process.env.BASEPATH || __dirname;
 const appPath = process.cwd();
 
 const vendors = [
