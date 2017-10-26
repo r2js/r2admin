@@ -78,5 +78,5 @@ module.exports = function AdminService(app, config) {
   }
 
   app.use(`/${baseUrl}`, router);
-  return { router, initRoutes };
+  return { router, initRoutes, libExtension };
 };
