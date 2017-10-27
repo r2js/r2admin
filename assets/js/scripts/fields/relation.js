@@ -69,7 +69,7 @@ const select = (el) => {
           });
 
           if (vals.length) {
-            self.setValue(vals, true);
+            self.setValue(vals);
           }
         }, 'json');
       } else {
