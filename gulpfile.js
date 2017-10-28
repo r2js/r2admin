@@ -9,13 +9,19 @@ const concat = require('gulp-concat');
 const minifyCSS = require('gulp-minify-css');
 
 // NOTE: run example
-// node_modules/gulp/bin/gulp.js --cwd "./example" run
+// CONFIG=config/modules node_modules/gulp/bin/gulp.js --cwd "./example" run
 
 const basePath = process.env.BASEPATH || __dirname;
 const vendorPath = process.env.VENDORPATH || __dirname;
 const appPath = process.cwd();
 
-const vendors = [
+let config = process.env.CONFIG;
+if (config) {
+  config = require(`${appPath}/${config}`); // eslint-disable-line
+}
+config = config || {};
+
+let vendors = [
   'jquery',
   'bootstrap',
   'selectize',
@@ -57,7 +63,11 @@ const vendors = [
   'tinymce/plugins/placeholder',
 ];
 
-const vendorStyles = [
+if (config.vendors) {
+  vendors = vendors.concat(config.vendors);
+}
+
+let vendorStyles = [
   `${vendorPath}/node_modules/bootstrap/dist/css/bootstrap.min.css`,
   `${vendorPath}/node_modules/selectize/dist/css/selectize.bootstrap3.css`,
   `${vendorPath}/node_modules/float-labels.js/dist/float-labels.css`,
@@ -71,6 +81,10 @@ const vendorStyles = [
   `${basePath}/assets/lib/fontawesome-5/fontawesome-pro-light.css`,
   `${basePath}/assets/lib/modulz.min.css`,
 ];
+
+if (config.vendorStyles) {
+  vendorStyles = vendorStyles.concat(config.vendorStyles);
+}
 
 gulp.task('build:app', () => {
   browserify({
