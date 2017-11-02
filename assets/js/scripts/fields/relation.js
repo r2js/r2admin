@@ -5,20 +5,21 @@ import 'selectize';
 global.jQuery = $;
 const log = debug('r2admin:field:relation');
 
-const select2nested = (data, valueField, displayField, prefix, initPrefix = '-') => {
+const select2nested = (data, valueField, displayField, isMultiple, prefix, initPrefix = '-') => {
   let r = [];
   let getPrefix = prefix;
   if (!getPrefix) {
-    getPrefix = initPrefix;
+    getPrefix = isMultiple ? '' : `${initPrefix} `;
   }
 
   for (const d in data) { // eslint-disable-line
     if (data.hasOwnProperty(d) && data[d][displayField]) { // eslint-disable-line
-      r.push({ [valueField]: data[d][valueField], [displayField]: `${getPrefix} ${data[d][displayField]}` });
+      r.push({ [valueField]: data[d][valueField], [displayField]: `${getPrefix}${data[d][displayField]}` });
 
       if (data[d].children) {
+        const addPrefix = isMultiple ? `${data[d][displayField]} / ` : initPrefix + getPrefix;
         r = r.concat(
-          select2nested(data[d].children, valueField, displayField, initPrefix + getPrefix)
+          select2nested(data[d].children, valueField, displayField, isMultiple, addPrefix)
         );
       }
     }
@@ -30,6 +31,7 @@ const select2nested = (data, valueField, displayField, prefix, initPrefix = '-')
 const select = (el) => {
   const data = el.data();
   const { ref, display, value, qtype, placeholder } = data;
+  const isMultiple = el.attr('multiple') === 'multiple';
   const { sort = display } = data;
 
   if (!display) {
@@ -57,7 +59,7 @@ const select = (el) => {
 
       if (qtype === 'fullArrayTree') {
         $.get(`/admin/${ref}/search`, Object.assign({}, { qType: 'fullArrayTree' }), (res) => {
-          const nested = select2nested(res.data, '_id', display);
+          const nested = select2nested(res.data, '_id', display, isMultiple);
           const getValue = value.split(',');
           const vals = [];
           self.clearOptions();
