@@ -7,10 +7,13 @@ const buffer = require('vinyl-buffer');
 const path = require('path');
 const concat = require('gulp-concat');
 const minifyCSS = require('gulp-minify-css');
+const fs = require('fs');
+const _ = require('underscore');
 
 // NOTE: run example
 // CONFIG=config/modules node_modules/gulp/bin/gulp.js --cwd "./example" run
 
+const env = process.ENV || 'development';
 const basePath = process.env.BASEPATH || __dirname;
 const vendorPath = process.env.VENDORPATH || __dirname;
 const appPath = process.cwd();
@@ -140,6 +143,18 @@ gulp.task('setup', () => {
     .pipe(gulp.dest(`${appPath}/public/dist`));
 });
 
+gulp.task('config', () => {
+  const configFile = require(`${process.cwd()}/config/${env}.js`);
+  const configVals = _.pick(configFile, config.configKeys || []);
+  const jsonStr = JSON.stringify(configVals);
+  const tmpl = `export default () => {
+    return ${jsonStr}
+  };
+  `;
+
+  fs.writeFileSync(`${appPath}/app/js/config.js`, tmpl);
+});
+
 gulp.task('fonts', () => (
   gulp.src([
     `${appPath}/app/font/**/*`,
@@ -188,7 +203,7 @@ gulp.task('less:base', () => (
     .pipe(gulp.dest(`${appPath}/public/assets/styles/base`))
 ));
 
-gulp.task('run', ['less:base', 'less:app', 'styles:vendor', 'styles:base', 'styles:app', 'fonts', 'setup', 'build:vendor', 'build:base', 'build:app'], () => {
+gulp.task('run', ['less:base', 'less:app', 'styles:vendor', 'styles:base', 'styles:app', 'fonts', 'setup', 'config', 'build:vendor', 'build:base', 'build:app'], () => {
   // watch base
   gulp.watch(`${basePath}/assets/less/**/*.less`, ['less:base']);
   gulp.watch(`${appPath}/public/assets/styles/base/**/*.css`, ['styles:base']);
