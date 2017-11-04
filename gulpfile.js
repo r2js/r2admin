@@ -203,7 +203,8 @@ gulp.task('less:base', () => (
     .pipe(gulp.dest(`${appPath}/public/assets/styles/base`))
 ));
 
-gulp.task('run', ['less:base', 'less:app', 'styles:vendor', 'styles:base', 'styles:app', 'fonts', 'setup', 'config', 'build:vendor', 'build:base', 'build:app'], () => {
+// config geçici olarak kaldırıldı
+gulp.task('run', ['less:base', 'less:app', 'styles:vendor', 'styles:base', 'styles:app', 'fonts', 'setup', 'build:vendor', 'build:base', 'build:app'], () => {
   // watch base
   gulp.watch(`${basePath}/assets/less/**/*.less`, ['less:base']);
   gulp.watch(`${appPath}/public/assets/styles/base/**/*.css`, ['styles:base']);
