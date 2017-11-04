@@ -8,6 +8,7 @@ const libRead = require('./lib/read');
 const libCreate = require('./lib/create');
 const libUpdate = require('./lib/update');
 const log = require('debug')('r2:admin');
+const utils = require('./lib/utils');
 
 const toString = Object.prototype.toString;
 module.exports = function AdminService(app, config) {
@@ -78,5 +79,5 @@ module.exports = function AdminService(app, config) {
   }
 
   app.use(`/${baseUrl}`, router);
-  return { router, initRoutes, libExtension };
+  return { router, initRoutes, libExtension, utils: utils(app) };
 };
