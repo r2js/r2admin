@@ -1,0 +1,17 @@
+{
+	"admin": {
+		"header": {
+			"logout": "Logout",
+			"home": "Home"
+		},
+		"navObject": {
+			"dashboard": "Dashboard",
+			"test": "Test"
+		},
+		"auth": {
+			"email": "Email",
+			"password": "Password",
+			"submit": "LOGIN"
+		}
+	}
+}

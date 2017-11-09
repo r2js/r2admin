@@ -1,7 +1,7 @@
 {
   "name": "r2admin",
   "description": "",
-  "version": "1.0.26",
+  "version": "1.0.27",
   "author": "Selçuk Fatih Sevinç",
   "license": "MIT",
   "engines": {
@@ -56,6 +56,7 @@
     "r2acl": "^1.0.1",
     "r2api": "^1.0.6",
     "r2base": "^1.0.11",
+    "r2i18n": "^1.0.0",
     "r2middleware": "^1.0.2",
     "r2mongoose": "^1.0.3",
     "r2nunjucks": "^1.0.0",

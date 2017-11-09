@@ -16,4 +16,9 @@ module.exports = {
       test: { nav: 'Test', icon: 'user-alt', model: 'test' },
     },
   },
+
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en',
+  },
 };

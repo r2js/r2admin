@@ -8,12 +8,14 @@
       <div class="col-md-4"></div>
       <div class="col-md-4">
         <div class="box-wrapper">
-          <div class="title-wrapper"></div>
+          <div class="title-wrapper">
+            {% block authLogo %}{% endblock %}
+          </div>
           <div class="form-wrapper Card interactive padding-3">
             <form role="form" action="/{{ admin.baseUrl }}/{{ admin.login }}" method="POST">
-              {% string 'email', {placeholder: 'Email'} %}{% endstring %}
-              {% password 'passwd', {placeholder: 'Password'} %}{% endpassword %}
-              {% submit 'LOGIN', {class: 'PillButton violet'} %}{% endsubmit %}
+              {% string 'email', {placeholder: __('admin.auth.email')} %}{% endstring %}
+              {% password 'passwd', {placeholder: __('admin.auth.password')} %}{% endpassword %}
+              {% submit __('admin.auth.submit'), {class: 'PillButton violet'} %}{% endsubmit %}
             </form>
           </div>
         </div>

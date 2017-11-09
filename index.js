@@ -21,7 +21,7 @@ module.exports = function AdminService(app, config) {
     return log('ui is not enabled');
   }
 
-  if (!app.hasServices('Nunjucks|User')) {
+  if (!app.hasServices('Nunjucks|User|I18N')) {
     return false;
   }
 
@@ -56,11 +56,13 @@ module.exports = function AdminService(app, config) {
   const read = libRead(app, getConf);
   const create = libCreate(app, getConf);
   const update = libUpdate(app, getConf);
+  const Utils = utils(app);
 
   // routes
   let initRoutes;
   const setRoutes = (routerInstance) => {
     routerInstance.get('/', libIndex(app));
+    routerInstance.get('/locale/:locale', Utils.locale);
     routerInstance.get(`/${login}`, auth.form);
     routerInstance.post(`/${login}`, auth.login);
     routerInstance.get(`/${logout}`, auth.logout);
@@ -79,5 +81,5 @@ module.exports = function AdminService(app, config) {
   }
 
   app.use(`/${baseUrl}`, router);
-  return { router, initRoutes, libExtension, utils: utils(app) };
+  return { router, initRoutes, libExtension, utils: Utils };
 };
