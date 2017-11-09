@@ -66,7 +66,7 @@ let vendors = [
   'tinymce/plugins/placeholder',
 ];
 
-if (config.vendors) {
+if (config.vendors && config.vendors.length) {
   vendors = vendors.concat(config.vendors);
 }
 
@@ -85,25 +85,35 @@ let vendorStyles = [
   `${basePath}/assets/lib/modulz.min.css`,
 ];
 
-if (config.vendorStyles) {
+if (config.vendorStyles && config.vendorStyles.length) {
   vendorStyles = vendorStyles.concat(config.vendorStyles);
 }
 
+let appEntries = {
+  'app.js': [`${appPath}/app/js/app.js`],
+};
+
+if (config.appEntries) {
+  appEntries = config.appEntries;
+}
+
 gulp.task('build:app', () => {
-  browserify({
-    entries: [`${appPath}/app/js/app.js`],
-    extensions: ['.js'],
-    debug: true,
-  })
-    .external(vendors)
-    .transform(babelify, { presets: ['es2015'] })
-    .bundle()
-    .pipe(source('app.js'))
-    .pipe(buffer())
-    .pipe($.uglify())
-    .pipe($.sourcemaps.init({ loadMaps: true }))
-    .pipe($.sourcemaps.write('./'))
-    .pipe(gulp.dest('public/dist'));
+  _.each(appEntries, (val, key) => {
+    browserify({
+      entries: val,
+      extensions: ['.js'],
+      debug: true,
+    })
+      .external(vendors)
+      .transform(babelify, { presets: ['es2015'] })
+      .bundle()
+      .pipe(source(key))
+      .pipe(buffer())
+      .pipe($.uglify())
+      .pipe($.sourcemaps.init({ loadMaps: true }))
+      .pipe($.sourcemaps.write('./'))
+      .pipe(gulp.dest('public/dist'));
+  });
 });
 
 gulp.task('build:base', () => {

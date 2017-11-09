@@ -1,5 +1,13 @@
 {% extends admin.path+'/index.html' %}
 
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="/dist/app.css?v={{ admin.version }}" />
+  <script type="text/javascript" src="/dist/app.js?v={{ admin.version }}"></script>
+  <script type="text/javascript" src="/dist/app1.js?v={{ admin.version }}"></script>
+  <script type="text/javascript" src="/dist/app2.js?v={{ admin.version }}"></script>
+{% endblock %}
+
 {% block logo %}
   <div class="logo">
     <h3 class="logo-customer"><a href="/{{ admin.baseUrl }}">TEST</a></h3>
