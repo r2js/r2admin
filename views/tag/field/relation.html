@@ -14,6 +14,9 @@
       data-value="{{ data[name] }}"
       data-qtype="{{ qType }}"
       data-placeholder="{{ placeholder or name }}"
+      {% if dataAttrs %}
+        {% for k, v in dataAttrs %}data-{{ k }}="{{ v }}"{% endfor %}
+      {% endif %}
       class="{{ class or 'f-relation' }}"
       style="visibility:hidden;display:none;"
       {% if instance === 'array' %}multiple{% endif %}>
