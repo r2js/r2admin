@@ -11,7 +11,7 @@ const log = require('debug')('r2:admin');
 const utils = require('./lib/utils');
 
 const toString = Object.prototype.toString;
-module.exports = function AdminService(app, config) {
+module.exports = function Admin(app, config) {
   const getConf = config || app.config('admin');
   if (!getConf) {
     return log('config not found!');
