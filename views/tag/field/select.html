@@ -15,6 +15,9 @@
       id="f-{{ name }}"
       data-placeholder="{{ placeholder or name }}"
       data-value="{{ dataValue }}"
+      {% if dataAttrs %}
+        {% for k, v in dataAttrs %}data-{{ k }}="{{ v }}"{% endfor %}
+      {% endif %}
       class="{{ class or 'f-select' }}"
       style="visibility:hidden;display:none;">
       {% set emptyArr = [] %}
