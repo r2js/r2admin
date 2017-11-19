@@ -49,7 +49,7 @@
 
             {% block navDashboard %}
             <li class="menu-item" role="menuitem">
-              <a class="menu-link {% if urlPath === ('/'+admin.baseUrl) %}active{% endif %} " href="/{{ admin.baseUrl }}">
+              <a class="menu-link {% if urlPath === '/' %}active{% endif %} " href="/{{ admin.baseUrl }}">
                 <i class="fal fa-tachometer-alt min-w1 w-auto"></i> {{ __('admin.navObject.dashboard') or 'Dashboard' }}
               </a>
             </li>
