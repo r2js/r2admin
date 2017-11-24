@@ -81,5 +81,5 @@ module.exports = function Admin(app, config) {
   }
 
   app.use(`/${baseUrl}`, router);
-  return { router, initRoutes, libExtension, utils: Utils };
+  return { router, initRoutes, libExtension, utils: Utils, njk };
 };
