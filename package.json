@@ -1,7 +1,7 @@
 {
   "name": "r2admin",
   "description": "",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "author": "Selçuk Fatih Sevinç",
   "license": "MIT",
   "engines": {
@@ -14,6 +14,7 @@
     "dotty": "0.0.2",
     "express-nunjucks": "^2.2.3",
     "nunjucks-date-filter": "^0.1.1",
+    "nunjucks-date-filter-local": "^0.1.2",
     "ultimate-pagination": "^1.0.0",
     "underscore": "^1.8.3"
   },
