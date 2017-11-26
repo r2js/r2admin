@@ -153,7 +153,7 @@ gulp.task('setup', () => {
   gulp.src([`${basePath}/assets/lib/switchery/dist/switchery.min.js`])
     .pipe(gulp.dest(`${appPath}/public/dist`));
 
-  gulp.src([`${appPath}/node_modules/X-editable/dist/jquery-editable/js/jquery-editable-poshytip.js`])
+  gulp.src([`${appPath}/node_modules/X-editable/dist/jquery-editable/js/jquery-editable-poshytip.min.js`])
     .pipe(gulp.dest(`${appPath}/public/dist`));
 });
 
