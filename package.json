@@ -1,7 +1,7 @@
 {
   "name": "r2admin",
   "description": "",
-  "version": "1.0.37",
+  "version": "1.0.38",
   "author": "Selçuk Fatih Sevinç",
   "license": "MIT",
   "engines": {
@@ -19,6 +19,7 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "X-editable": "^1.5.1",
     "autoprefixer": "^6.4.0",
     "babel-preset-es2015": "^6.9.0",
     "babelify": "^7.3.0",
