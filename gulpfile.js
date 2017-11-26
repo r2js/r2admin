@@ -78,7 +78,6 @@ let vendorStyles = [
   `${vendorPath}/node_modules/tinymce/skins/lightgray/content.min.css`,
   `${vendorPath}/node_modules/flatpickr/dist/flatpickr.min.css`,
   `${vendorPath}/node_modules/noty/lib/noty.css`,
-  `${vendorPath}/node_modules/X-editable/bootstrap3-editable/css/bootstrap-editable.css`,
   // from basePath
   `${basePath}/assets/lib/switchery/dist/switchery.min.css`,
   `${basePath}/assets/lib/fontawesome-5/fontawesome-pro-core.css`,
@@ -151,9 +150,6 @@ gulp.task('setup', () => {
     .pipe(gulp.dest(`${appPath}/node_modules/tinymce/plugins/placeholder`));
 
   gulp.src([`${basePath}/assets/lib/switchery/dist/switchery.min.js`])
-    .pipe(gulp.dest(`${appPath}/public/dist`));
-
-  gulp.src([`${appPath}/node_modules/X-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js`])
     .pipe(gulp.dest(`${appPath}/public/dist`));
 });
 
