@@ -1,7 +1,7 @@
 {
   "name": "r2admin",
   "description": "",
-  "version": "1.0.41",
+  "version": "1.0.42",
   "author": "Selçuk Fatih Sevinç",
   "license": "MIT",
   "engines": {
@@ -104,9 +104,14 @@
     "url": "https://github.com/r2js/r2admin/issues"
   },
   "homepage": "https://github.com/r2js/r2admin",
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
   "browserify-shim": {
     "jquery": {
-      "exports": ["$", "jQuery"]
+      "exports": "jQuery"
     }
   }
 }
