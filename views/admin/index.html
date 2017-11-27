@@ -59,7 +59,7 @@
               {% for navKey, m in admin.conf.models %}
                 {% if m.disable !== true %}
                 <li class="menu-item" role="menuitem">
-                  <a class="menu-link {% if urlPath.includes('/'+navKey) %}active{% endif %}" href="/{{ admin.baseUrl }}/{{ navKey }}">
+                  <a class="menu-link {% if urlPath.includes('/'+navKey) %}active{% endif %}" href="{% if m.path %}{{ m.path }}{% else %}/{{ admin.baseUrl }}/{{ navKey }}{% endif %}">
                     {% if m.icon %}<i class="fal fa-{{ m.icon }} min-w1 w-auto"></i>{% endif %}
                     {{ __('admin.navObject.'+navKey) or m.nav or k }}
                   </a>
