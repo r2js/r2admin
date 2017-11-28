@@ -17,7 +17,7 @@ const select2nested = (data, valueField, displayField, isMultiple, prefix, initP
       r.push({ [valueField]: data[d][valueField], [displayField]: `${getPrefix}${data[d][displayField]}` });
 
       if (data[d].children) {
-        const addPrefix = isMultiple ? `${data[d][displayField]} / ` : initPrefix + getPrefix;
+        const addPrefix = isMultiple ? `${getPrefix}${data[d][displayField]} / ` : initPrefix + getPrefix;
         r = r.concat(
           select2nested(data[d].children, valueField, displayField, isMultiple, addPrefix)
         );
