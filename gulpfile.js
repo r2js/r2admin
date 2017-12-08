@@ -178,13 +178,13 @@ gulp.task('fonts', () => (
     .pipe(gulp.dest('public/dist/fonts'))
 ));
 
-gulp.task('styles:app', () => (
+gulp.task('styles:app', ['less:app'], () => (
   gulp.src(`${appPath}/public/assets/styles/app/**/*`)
     .pipe(minifyCSS())
     .pipe(gulp.dest(`${appPath}/public/dist`))
 ));
 
-gulp.task('styles:base', () => (
+gulp.task('styles:base', ['less:base'], () => (
   gulp.src(`${appPath}/public/assets/styles/base/**/*`)
     .pipe(minifyCSS())
     .pipe(gulp.dest(`${appPath}/public/dist`))
