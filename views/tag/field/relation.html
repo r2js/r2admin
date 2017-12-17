@@ -19,9 +19,9 @@
       {% endif %}
       class="{{ class or 'f-relation' }}"
       style="visibility:hidden;display:none;"
-      {% if instance === 'array' %}multiple{% endif %}>
+      {% if (multiple or instance === 'array') %}multiple{% endif %}>
         <option value=""></option>
-        {% if instance === 'array' %}
+        {% if (multiple or instance === 'array') %}
           {% set emptyArr = [] %}
           {% set dataArr = emptyArr.concat(data[name]) %}
           {% for d in dataArr %}

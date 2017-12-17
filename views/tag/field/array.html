@@ -8,17 +8,24 @@
       {% set dataValue = data.get('_'+name) or data.get(name) %}
     {% endif %}
 
-    <input
+    <select
       name="{{ name }}"
       id="f-{{ name }}"
       data-placeholder="{{ placeholder or name }}"
       data-value="{{ dataValue }}"
       type="text"
       class="{{ class or 'f-array' }}"
-      value="{{ dataValue }}"
       tabindex="-1"
+      multiple="multiple"
       style="display: none;">
+        <option value=""></option>
+        {% set emptyArr = [] %}
+        {% set dataArr = emptyArr.concat(dataValue) %}
+        {% for d in dataArr %}
+          <option selected="selected" value="{{ d }}">{{ d }}</option>
+        {% endfor %}
+    </select>
 
-      {{ helpMacro.parse(name, help, errors, errorClass) }}
+    {{ helpMacro.parse(name, help, errors, errorClass) }}
   </div>
 </div>
