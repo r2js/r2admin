@@ -24,6 +24,12 @@
         {% for d in dataArr %}
           <option selected="selected" value="{{ d }}">{{ d }}</option>
         {% endfor %}
+
+        {% if optData %}
+          {% for d in optData %}
+            <option value="{{ d }}">{{ d }}</option>
+          {% endfor %}
+        {% endif %}
     </select>
 
     {{ helpMacro.parse(name, help, errors, errorClass) }}
