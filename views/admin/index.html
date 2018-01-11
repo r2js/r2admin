@@ -23,8 +23,10 @@
             {% block navbar %}
               <ul class="nav navbar-nav navbar-right">
                 <li>
-                  <a href="/admin/logout"><i class="fal fa-sign-out min-w1 w-auto"></i>
-                    {% block logout %}{{ __('admin.header.logout') }}{% endblock %}
+                  <a href="/{{ admin.baseUrl }}/{{ admin.logout }}">
+                    {% block logout %}
+                      <i class="fal fa-sign-out min-w1 w-auto"></i> {{ __('admin.header.logout') }}
+                    {% endblock %}
                   </a>
                 </li>
               </ul>
