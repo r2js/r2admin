@@ -15,8 +15,10 @@
             <form role="form" action="/{{ admin.baseUrl }}/{{ admin.login }}" method="POST">
               {% string 'email', {placeholder: __('admin.auth.email')} %}{% endstring %}
               {% password 'passwd', {placeholder: __('admin.auth.password')} %}{% endpassword %}
+              {% block beforeSubmit %}{% endblock %}
               {% block authSubmit %}{% submit __('admin.auth.submit'), {class: 'PillButton violet'} %}{% endsubmit %}{% endblock %}
             </form>
+            {% block afterSubmit %}{% endblock %}
           </div>
         </div>
       </div>
