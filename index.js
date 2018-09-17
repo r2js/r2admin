@@ -31,6 +31,9 @@ module.exports = function Admin(app, config) {
     baseUrl = 'admin',
     login = 'login',
     logout = 'logout',
+    preMiddleware = (req, res, next) => next(),
+    authMiddleware = (req, res, next) => next(),
+    routeMiddleware = (req, res, next) => next(),
   } = getConf;
 
   // set views directory
@@ -52,6 +55,10 @@ module.exports = function Admin(app, config) {
   // libraries
   libMiddleware(app, getConf, viewsPath, router);
   libExtension(app, njk);
+
+  // inject pre middleware
+  router.use(preMiddleware);
+
   const auth = libAuth(app, getConf);
   const read = libRead(app, getConf);
   const create = libCreate(app, getConf);
@@ -63,15 +70,15 @@ module.exports = function Admin(app, config) {
   const setRoutes = (routerInstance) => {
     routerInstance.get('/', libIndex(app));
     routerInstance.get('/locale/:locale', Utils.locale);
-    routerInstance.get(`/${login}`, auth.form);
-    routerInstance.post(`/${login}`, auth.login);
-    routerInstance.get(`/${logout}`, auth.logout);
-    routerInstance.get('/:object', read.object);
-    routerInstance.get('/:object/new', create.form);
-    routerInstance.post('/:object/new', create.object);
-    routerInstance.get('/:object/search', read.search);
-    routerInstance.get('/:object/:id', update.form);
-    routerInstance.post('/:object/:id', update.object);
+    routerInstance.get(`/${login}`, authMiddleware, auth.form);
+    routerInstance.post(`/${login}`, authMiddleware, auth.login);
+    routerInstance.get(`/${logout}`, authMiddleware, auth.logout);
+    routerInstance.get('/:object', routeMiddleware, read.object);
+    routerInstance.get('/:object/new', routeMiddleware, create.form);
+    routerInstance.post('/:object/new', routeMiddleware, create.object);
+    routerInstance.get('/:object/search', routeMiddleware, read.search);
+    routerInstance.get('/:object/:id', routeMiddleware, update.form);
+    routerInstance.post('/:object/:id', routeMiddleware, update.object);
   };
 
   if (routes) {
