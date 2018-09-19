@@ -5,7 +5,7 @@
   <div>
     {% set instance = path.instance|lower %}
     <select
-      name="{{ name }}"
+      name="{{ fieldName or name }}"
       id="f-{{ name }}"
       data-ref="{{ ref or pathOpts.ref }}"
       data-display="{{ display or pathOpts.display }}"
