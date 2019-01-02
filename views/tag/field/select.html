@@ -19,7 +19,8 @@
         {% for k, v in dataAttrs %}data-{{ k }}="{{ v }}"{% endfor %}
       {% endif %}
       class="{{ class or 'f-select' }}"
-      style="visibility:hidden;display:none;">
+      style="visibility:hidden;display:none;"
+      {% if multiple %}multiple{% endif %}>
       {% set emptyArr = [] %}
       {% set dataArr = emptyArr.concat(optData) %}
       <option value=""></option>
